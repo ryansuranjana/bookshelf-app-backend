@@ -1,0 +1,19 @@
+{
+  "name": "bookshelf-app-backend",
+  "version": "1.0.0",
+  "description": "Submission Dicoding Backend Web Developer Class",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ryan Suranjana",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.19",
+    "standard": "^17.0.0"
+  },
+  "dependencies": {
+    "@hapi/hapi": "^20.2.2",
+    "nanoid": "^4.0.0"
+  }
+}
