@@ -4,13 +4,13 @@
   "description": "Submission Dicoding Backend Web Developer Class",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./src/server.js"
   },
   "author": "Ryan Suranjana",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.19",
-    "standard": "^17.0.0"
+    "nodemon": "^2.0.19"
   },
   "dependencies": {
     "@hapi/hapi": "^20.2.2",
