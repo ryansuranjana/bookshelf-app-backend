@@ -57,4 +57,23 @@ const getAllBooksHandler = (request, h) => {
         },
     }).type('application/json').code(200);
 }
-export { addBookHandler, getAllBooksHandler };
+
+const getBookByIdHandler = (request, h) => {
+    const { bookId } = request.params;
+    const book = books.find(book => book.id === bookId);
+
+    if(!book) {
+        return h.response({
+            "status": "fail",
+            "message": "Buku tidak ditemukan",
+        }).type('application/json').code(404);
+    }
+
+    return h.response({
+        "status": "success",
+        "data": {
+            book
+        }
+    })
+}
+export { addBookHandler, getAllBooksHandler, getBookByIdHandler };
