@@ -123,4 +123,31 @@ const updateBookHandler = (request, h) => {
         }).type('application/json').code(500);
     }
 }
-export { addBookHandler, getAllBooksHandler, getBookByIdHandler, updateBookHandler };
+
+const deleteBookHandler = (request, h) => {
+    try {
+        const { bookId } = request.params;
+        const book = books.find(book => book.id === bookId);
+
+        if(!book) {
+            return h.response({
+                "status": "fail",
+                "message": "Buku gagal dihapus. Id tidak ditemukan"
+            }).type('application/json').code(404);
+        }
+
+        const bookIndex = books.findIndex(book => book.id === bookId);
+        books.splice(bookIndex, 1);
+
+        return h.response({
+            "status": "success",
+            "message": "Buku berhasil dihapus"
+        }).type('application/json').code(200);
+    } catch (error) {
+        return h.response({
+            "status": "error",
+            "message": "Buku gagal dihapus",
+        }).type('application/json').code(500);
+    }
+}
+export { addBookHandler, getAllBooksHandler, getBookByIdHandler, updateBookHandler, deleteBookHandler };
