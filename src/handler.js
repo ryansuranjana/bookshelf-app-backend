@@ -41,4 +41,20 @@ const addBookHandler = (request, h) => {
     }
 }
 
-export { addBookHandler };
+const getAllBooksHandler = (request, h) => {
+    const filterBook = [];
+    for (const book of books) {
+        filterBook.push({
+            "id" : book.id,
+            "name" : book.name,
+            "publisher" : book.publisher,
+        });
+    }
+    return h.response({
+        "status": "success",
+        "data": {
+            "books": filterBook,
+        },
+    }).type('application/json').code(200);
+}
+export { addBookHandler, getAllBooksHandler };
