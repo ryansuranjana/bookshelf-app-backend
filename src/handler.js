@@ -42,20 +42,59 @@ const addBookHandler = (request, h) => {
 }
 
 const getAllBooksHandler = (request, h) => {
-    const filterBook = [];
-    for (const book of books) {
-        filterBook.push({
-            "id" : book.id,
-            "name" : book.name,
-            "publisher" : book.publisher,
-        });
+    try {
+        const filterBook = [];
+
+        if(request.query.name) {
+            const bookFilterName = books.filter(book => book.name.toLowerCase().includes(request.query.name.toLowerCase()));
+            for (const book of bookFilterName) {
+                filterBook.push({
+                    "id" : book.id,
+                    "name" : book.name,
+                    "publisher" : book.publisher,
+                });
+            }
+        } else if (request.query.reading) {
+            const reading = request.query.reading == 1 ? true : false;
+            const bookFilterReading = books.filter(book => book.reading === reading);
+            for (const book of bookFilterReading) {
+                filterBook.push({
+                    "id" : book.id,
+                    "name" : book.name,
+                    "publisher" : book.publisher,
+                });
+            }
+        } else if (request.query.finished) {
+            const finished = request.query.finished == 1 ? true : false;
+            const bookFilterFinished = books.filter(book => book.finished === finished);
+            for (const book of bookFilterFinished) {
+                filterBook.push({
+                    "id" : book.id,
+                    "name" : book.name,
+                    "publisher" : book.publisher,
+                });
+            }
+        } else {
+            for (const book of books) {
+                filterBook.push({
+                    "id" : book.id,
+                    "name" : book.name,
+                    "publisher" : book.publisher,
+                });
+            }
+        }
+        return h.response({
+            "status": "success",
+            "data": {
+                "books": filterBook
+            },
+        }).type('application/json').code(200);
+    } catch (error) {
+        return h.response({
+            "status": "error",
+            "message": "Buku gagal didapatkan",
+        }).type('application/json').code(500);
     }
-    return h.response({
-        "status": "success",
-        "data": {
-            "books": filterBook
-        },
-    }).type('application/json').code(200);
 }
 
 const getBookByIdHandler = (request, h) => {
